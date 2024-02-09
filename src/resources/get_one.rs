@@ -1,14 +1,15 @@
 use askama::Template;
 use axum::{
+    extract::Path,
     http::StatusCode,
-    response::{Html, IntoResponse}
+    response::{Html, IntoResponse},
 };
 
 #[derive(Template)]
 #[template(path = "slangword.html")]
 struct SlangWordTemplate;
 
-pub async fn get_slang_word() -> impl IntoResponse {
+pub async fn get_slang_word(Path(_id): Path<i32>) -> impl IntoResponse {
     let template = SlangWordTemplate;
 
     match template.render() {

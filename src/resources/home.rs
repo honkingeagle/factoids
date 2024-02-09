@@ -1,7 +1,7 @@
 use askama::Template;
 use axum::{
     http::StatusCode,
-    response::{Html, IntoResponse}
+    response::{Html, IntoResponse},
 };
 
 #[derive(Template)]
