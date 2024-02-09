@@ -4,9 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>factoids</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap"); */
+    </style>
+    <link href="public/output.css" rel="stylesheet" />
     <script src="public/htmx.min.js"></script>
   </head>
-  <body>
-    Home
+  <body class="w-[90%] md:w-[50%] mx-auto min-h-screen">
+    <header class="bg-red-400 flex items-center justify-between">
+      <section>
+        <img
+          src="public/elpy.png"
+          alt="a cartoon robot"
+          class="w-[50%] h-[50%]"
+        />
+        <span class="p-2 bg-[#FEA86A] text-lg">factoids</span>
+      </section>
+      <nav class="hidden md:block space-x-4 mr-6">
+        <a href="/">Home</a>
+        <a href="#">About</a>
+      </nav>
+    </header>
+    <main class="mt-[15%] md:mt-[10%] text-center space-y-8 text-neutral-100">
+      <h1 class="text-[2.5rem]">
+        A <span class="bg-red-400">Slang</span> Word Dictionary for the Cool
+        Kids
+      </h1>
+      <div class="space-y-2">
+        <p class="text-sm">ᛇ ᚨᛗ ᚦᚨ ᛈᚱᛟᛏᚨᚷᛟᚾᛁᛊᛏ ᛟᚠ ᛗᛇ ᛟᚾ ᛚᛇᚠ</p>
+        <p class="text-sm">._.</p>
+        <p class="text-sm">Madara Uchiha</p>
+      </div>
+    </main>
   </body>
 </html>
