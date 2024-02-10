@@ -7,12 +7,10 @@
     <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap");
-      /* @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap"); */
     </style>
     <link href="public/output.css" rel="stylesheet" />
-    <script src="public/htmx.min.js"></script>
   </head>
-  <body class="w-[90%] md:w-[50%] mx-auto min-h-screen">
+  <body class="w-[90%] md:w-[50%] mx-auto">
     <header class="bg-red-400 flex items-center justify-between">
       <section>
         <img
@@ -27,16 +25,43 @@
         <a href="#">About</a>
       </nav>
     </header>
-    <main class="mt-[15%] md:mt-[10%] text-center space-y-8 text-neutral-100">
-      <h1 class="text-[2.5rem]">
-        A <span class="bg-red-400">Slang</span> Word Dictionary for the Cool
-        Kids
-      </h1>
-      <div class="space-y-2 text-sm">
-        <p>ᚲᚱᛖᛏᛖ ᛁᛟᚢᚱ ᛟᚹᚾ ᛞᛖᛊᛏᛁᚾᛁ</p>
-        <p>._.</p>
-        <p>honkingeagle</p>
-      </div>
+    <main class="mt-[15%] md:mt-[10%]">
+      <section class="text-center space-y-8 text-neutral-100">
+        <h1 class="text-[2.5rem]">
+          A <span class="bg-red-400">Slang</span> Word Dictionary for the Cool
+          Kids
+        </h1>
+        <div class="space-y-2 text-sm">
+          <p>ᚲᚱᛖᛏᛖ ᛁᛟᚢᚱ ᛟᚹᚾ ᛞᛖᛊᛏᛁᚾᛁ</p>
+          <p>._.</p>
+          <p>honkingeagle</p>
+        </div>
+      </section>
+
+      <section class="flex flex-col items-center mt-[5%]">
+        <span class="bg-rose-500 mb-[2%] max-w-fit p-2">Words</span>
+        <section
+          class="my-[6%] text-black grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <div class="p-4 shadow-xl rounded-md">
+            <span class="p-2 bg-[#FEA86A] text-lg">factoids</span>
+            <p class="my-1 p-2 bg-red-400 text-sm max-w-fit">>> syn facts</p>
+            <p class="my-2 text-neutral-100">~ meaning</p>
+            <p class="my-2 text-neutral-100">
+              a thing that is known or proved to be true.
+            </p>
+          </div>
+          <div class="p-4 shadow-xl rounded-md">
+            <span class="p-2 bg-[#FEA86A] text-lg">waguizy</span>
+            <p class="my-1 p-2 bg-red-400 text-sm max-w-fit">>> syn wagwan</p>
+            <p class="my-2 text-neutral-100">~ meaning</p>
+            <p class="my-2 text-neutral-100">
+              a thing that is known or proved to be true.
+            </p>
+          </div>
+        </section>
+      </section>
     </main>
+    <script src="public/htmx.min.js"></script>
   </body>
 </html>
