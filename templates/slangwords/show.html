@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+<div class="py-4 pl-4 pr-2 shadow-xl rounded-md">
+  <span class="p-2 bg-[#FEA86A] text-lg">{{ slang_word.word }}</span>
+  <p class="mb-1 p-2 bg-red-400 text-sm max-w-fit">
+    use syn::{{ slang_word.synonym }};
+  </p>
+  <p class="mt-5 mb-2 text-neutral-100">{{ slang_word.description }}</p>
+</div>
+{% endblock %}
