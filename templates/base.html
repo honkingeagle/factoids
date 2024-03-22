@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="a slang word dictionary for the cool kids"
+    />
+    <title>factoids</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    id="content"
+    style="font-family: 'Caesar Dressing', sans-serif"
+    class="w-[90%] md:w-[50%] mx-auto mt-[2rem] bg-[#211F1A] tracking-[.5rem]"
+  >
+    <header class="bg-red-400 flex items-center justify-between">
+      <section>
+        <img
+          src="/public/elpy.png"
+          alt="a cartoon robot"
+          class="w-[50%] h-[50%]"
+        />
+        <span class="p-2 bg-[#FEA86A] text-lg">factoids</span>
+      </section>
+      <nav class="hidden md:flex space-x-4 mr-6">
+        <a class="hover:text-rose-600" href="/">Home</a>
+        <a class="hover:text-rose-600" href="#">About</a>
+      </nav>
+    </header>
+    <main class="mt-[15%] md:mt-[10%]">{% block content %}{% endblock %}</main>
+    <script src="/public/htmx.min.js"></script>
+  </body>
+</html>
