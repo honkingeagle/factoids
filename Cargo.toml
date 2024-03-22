@@ -4,8 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-askama = "0.12.1"
-axum = "0.7.3"
+askama = { version = "0.12.1", features = ["with-axum"] }
+askama_axum = "0.4.0"
+axum = { version = "0.7.3", features = ["query"] }
+serde = { version = "1.0.197", features = ["derive"] }
 shuttle-axum = "0.38.0"
 shuttle-runtime = "0.38.0"
 shuttle-shared-db = { version = "0.38.0", features = ["sqlx", "postgres"] }
