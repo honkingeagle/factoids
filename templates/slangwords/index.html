@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<section
+  x-data="{ page_offset: 0 }"
+  class="text-center space-y-8 text-neutral-100"
+>
+  <h1 class="text-[2.5rem]">A Slang Word Dictionary for the Cool Kids</h1>
+  <div class="space-y-2 text-sm">
+    <p>ᚲᚱᛖᛏᛖ ᛁᛟᚢᚱ ᛟᚹᚾ ᛞᛖᛊᛏᛁᚾᛁ</p>
+    <p>._.</p>
+    <p>honkingeagle</p>
+  </div>
+</section>
+<section class="flex flex-col mt-[5%]">
+  <span class="bg-rose-500 mb-[2%] max-w-fit p-2 mx-auto">Words</span>
+  {% if slang_words.len() > 0 %} {% for slangword in slang_words %}
+  <div
+    hx-replace-url="true"
+    hx-get="/slangword/{{ slangword.id }}"
+    hx-target="#content"
+    class="cursor-pointer w-[100%] md:w-[80%] py-4 pl-4 pr-2 shadow-xl rounded-md my-[6%] mx-auto"
+  >
+    <span class="p-2 bg-[#FEA86A] text-lg">{{ slangword.word }}</span>
+    <p class="mb-1 p-2 bg-red-400 text-sm max-w-fit">
+      use syn::{{ slangword.synonym }};
+    </p>
+    <p class="text-sm mt-10 text-neutral-100">{{ slangword.description }}.</p>
+  </div>
+  {% endfor %} {% else %}
+  <h2 class="my-10 text-center text-neutral-100">
+    Be the first to store your own slangword 🚀
+  </h2>
+  {% endif %}
+</section>
+{% endblock %}
