@@ -6,4 +6,20 @@
   </p>
   <p class="mt-5 mb-2 text-neutral-100">{{ slang_word.description }}</p>
 </div>
+<div class="flex items-center space-x-2 text-sm mt-4">
+  <span
+    hx-replace-url="true"
+    hx-get="/slangword/update/{{ slang_word.id }}"
+    hx-target="#content"
+    class="cursor-pointer p-2 bg-[#FEA86A]"
+    >update</span
+  >
+  <span
+    hx-replace-url="true"
+    hx-delete="/slangword/{{ slang_word.id }}"
+    hx-target="#content"
+    class="cursor-pointer p-2 bg-rose-500"
+    >delete</span
+  >
+</div>
 {% endblock %}
