@@ -1,5 +1,29 @@
+use crate::SharedState;
 use axum::{
-    extract::Path
+    extract::{Path, State},
+    http::StatusCode,
+    response::{Redirect, IntoResponse},
 };
+pub async fn delete_slang_word(
+    State(state): State<SharedState>,
+    Path(id): Path<i32>
+) -> impl IntoResponse {
+    let query = sqlx::query(
+        r#"
+            delete 
+            from slangwords
+            where id = $1
+        "#,
+    )
+    .bind(id)
+    .execute(&state.pool)
+    .await;
 
-pub async fn delete_slang_word(Path(_id): Path<i32>) {}
+    match query {
+        Ok(_) => Redirect::to("/").into_response(),
+        Err(err) => (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            format!("Err {err}")
+        ).into_response(),
+    }
+}
