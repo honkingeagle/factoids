@@ -8,7 +8,7 @@
       content="a slang word dictionary for the cool kids"
     />
     <title>factoids</title>
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap");
     </style>
@@ -28,9 +28,22 @@
         />
         <span class="p-2 bg-[#FEA86A] text-lg">factoids</span>
       </section>
-      <nav class="hidden md:flex space-x-4 mr-6">
-        <a class="hover:text-rose-600" href="/">Home</a>
-        <a class="hover:text-rose-600" href="#">About</a>
+      <nav class="hidden md:flex items-center space-x-4 mr-6">
+        <span
+          hx-replace-url="true"
+          hx-get="/"
+          hx-target="#content"
+          class="cursor-pointer hover:text-rose-600"
+          >Home</span
+        >
+        <span
+          hx-replace-url="true"
+          hx-get="/slangword/store"
+          hx-target="#content"
+          class="cursor-pointer p-2 bg-rose-500 text-lg"
+        >
+          Post
+        </span>
       </nav>
     </header>
     <main class="mt-[15%] md:mt-[10%]">{% block content %}{% endblock %}</main>
