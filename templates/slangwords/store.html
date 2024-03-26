@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<div class="mx-auto w-[95%] md:w-[50%] flex flex-col items-center">
+  <h1 class="text-neutral-100 text-xl mb-8">Store a word</h1>
+  <form
+    hx-post="/slangword/create"
+    hx-target="#content"
+    hx-replace-url="true"
+    class="flex flex-col items-center text-lg"
+  >
+    <input type="text" class="p-2" name="word" placeholder="Word" required />
+    <input
+      type="text"
+      class="p-2"
+      name="synonym"
+      placeholder="Synonym"
+      required
+    />
+    <input
+      type="text"
+      class="p-2"
+      name="description"
+      placeholder="Description"
+      required
+    />
+    <button class="btn btn-default mx-auto w-[100%] py-4 bg-rose-500">
+      Post
+    </button>
+  </form>
+</div>
+{% endblock %}
