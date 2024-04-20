@@ -35,7 +35,7 @@ pub async fn create_slang_word(
         Ok(pg_row) => {
             let id: i32 = pg_row.get("id");
             let uri = format!("/slangword/{}", id);
-            
+
             Redirect::to(&uri).into_response()
         }
         Err(_) => (

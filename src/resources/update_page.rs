@@ -2,15 +2,15 @@ use super::SlangWord;
 use crate::SharedState;
 use askama::Template;
 use axum::{
-    extract::{ Path, State,},
+    extract::{Path, State},
     http::StatusCode,
-    response::{ Html, IntoResponse },
+    response::{Html, IntoResponse},
 };
 
 #[derive(Template)]
 #[template(path = "slangwords/update.html")]
 struct UpdateTemplate {
-    slangword: SlangWord
+    slangword: SlangWord,
 }
 
 impl UpdateTemplate {
@@ -37,7 +37,7 @@ pub async fn go_to_update_page(
     match query {
         Ok(slang_word) => {
             let template = UpdateTemplate::new(slang_word);
-        
+
             match template.render() {
                 Ok(html) => Html(html).into_response(),
                 Err(_) => (
@@ -47,9 +47,6 @@ pub async fn go_to_update_page(
                     .into_response(),
             }
         }
-        Err(_) => (
-            StatusCode::NOT_FOUND
-        ).into_response(),
+        Err(_) => (StatusCode::NOT_FOUND).into_response(),
     }
-
 }

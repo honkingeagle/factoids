@@ -1,8 +1,8 @@
 use crate::SharedState;
 use axum::{
-    extract::{Form, State, Path},
-    response::{IntoResponse, Redirect},
+    extract::{Form, Path, State},
     http::StatusCode,
+    response::{IntoResponse, Redirect},
 };
 
 #[derive(sqlx::FromRow, serde::Deserialize)]
@@ -34,12 +34,9 @@ pub async fn update_slang_word(
     match query {
         Ok(_) => {
             let uri = format!("/slangword/{}", id);
-            
+
             Redirect::to(&uri).into_response()
         }
-        Err(err) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            format!("Err {err}")
-        ).into_response(),
+        Err(err) => (StatusCode::INTERNAL_SERVER_ERROR, format!("Err {err}")).into_response(),
     }
 }

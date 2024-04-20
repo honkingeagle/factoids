@@ -6,13 +6,13 @@ pub mod store_page;
 pub mod update;
 pub mod update_page;
 
-pub use home::home;
-pub use get_one::get_slang_word;
-pub use store::create_slang_word;
-pub use update::update_slang_word;
-pub use store_page::go_to_store_page;
-pub use update_page::go_to_update_page;
 pub use delete::delete_slang_word;
+pub use get_one::get_slang_word;
+pub use home::home;
+pub use store::create_slang_word;
+pub use store_page::go_to_store_page;
+pub use update::update_slang_word;
+pub use update_page::go_to_update_page;
 
 #[derive(sqlx::FromRow, serde::Deserialize)]
 pub struct SlangWord {
