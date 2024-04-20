@@ -1,4 +1,4 @@
-use factoids::AppState;
+use factoids::AppStateBuilder;
 use sqlx::PgPool;
 use std::{process, sync::Arc};
 
@@ -9,7 +9,7 @@ async fn main(#[shuttle_shared_db::Postgres] pool: PgPool) -> shuttle_axum::Shut
         process::exit(1);
     });
 
-    let state = Arc::new(AppState::new(pool));
+    let state = Arc::new(AppStateBuilder::new().pool(pool).build());
 
     let router = factoids::create_router(state);
 

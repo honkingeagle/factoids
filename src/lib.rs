@@ -14,11 +14,27 @@ pub struct AppState {
     pub pool: PgPool,
 }
 
-impl AppState {
-    pub fn new(pool: PgPool) -> AppState {
-        AppState { pool }
+pub struct AppStateBuilder {
+    pub pool: Option<PgPool>,
+}
+
+impl AppStateBuilder {
+    pub fn new() -> AppStateBuilder {
+        AppStateBuilder { pool: None }
+    }
+
+    pub fn pool(mut self, pool: PgPool) -> AppStateBuilder {
+        self.pool = Some(pool);
+        self
+    }
+
+    pub fn build(self) -> AppState {
+        AppState {
+            pool: self.pool.unwrap(),
+        }
     }
 }
+
 
 pub fn create_router(state: SharedState) -> Router {
     Router::new()
