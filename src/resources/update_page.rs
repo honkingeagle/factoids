@@ -40,13 +40,13 @@ pub async fn go_to_update_page(
 
             match template.render() {
                 Ok(html) => Html(html).into_response(),
-                Err(_) => (
+                Err(err) => (
                     StatusCode::INTERNAL_SERVER_ERROR,
-                    format!("Failed to render template!"),
+                    format!("Failed to render template! {err}"),
                 )
                     .into_response(),
             }
         }
-        Err(_) => (StatusCode::NOT_FOUND).into_response(),
+        Err(err) => (StatusCode::NOT_FOUND, format!("{err}")).into_response(),
     }
 }

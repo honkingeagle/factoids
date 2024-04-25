@@ -40,16 +40,16 @@ pub async fn get_slang_word(
 
             match template.render() {
                 Ok(html) => Html(html).into_response(),
-                Err(_) => (
+                Err(err) => (
                     StatusCode::INTERNAL_SERVER_ERROR,
-                    format!("Failed to render template!"),
+                    format!("Failed to render template! {err}"),
                 )
                     .into_response(),
             }
         }
-        Err(_) => (
+        Err(err) => (
             StatusCode::NOT_FOUND,
-            "No slangword with that id is available".to_string(),
+            format!("{err}"),
         )
             .into_response(),
     }

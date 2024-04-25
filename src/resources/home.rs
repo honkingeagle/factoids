@@ -59,16 +59,15 @@ pub async fn home(
 
             match template.render() {
                 Ok(html) => Html(html).into_response(),
-                Err(_) => (
-                    StatusCode::INTERNAL_SERVER_ERROR,
-                    format!("Failed to render template!"),
+                Err(err) => (
+                    format!("Failed to render template! {err}"),
                 )
                     .into_response(),
             }
         }
-        Err(_) => (
+        Err(err) => (
             StatusCode::NOT_FOUND,
-            format!("No other slangwords available!"),
+            format!("{err}"),
         )
             .into_response(),
     }

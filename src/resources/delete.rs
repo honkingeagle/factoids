@@ -21,6 +21,6 @@ pub async fn delete_slang_word(
 
     match query {
         Ok(_) => Redirect::to("/").into_response(),
-        Err(err) => (StatusCode::INTERNAL_SERVER_ERROR, format!("Err {err}")).into_response(),
+        Err(err) => (StatusCode::NOT_FOUND, format!("{err}")).into_response(),
     }
 }

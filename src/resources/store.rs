@@ -38,9 +38,9 @@ pub async fn create_slang_word(
 
             Redirect::to(&uri).into_response()
         }
-        Err(_) => (
+        Err(err) => (
             StatusCode::INTERNAL_SERVER_ERROR,
-            "failed to add slangword, please try again!".to_string(),
+            format!("{err}"),
         )
             .into_response(),
     }
