@@ -1,4 +1,5 @@
 pub mod delete;
+pub mod get_all;
 pub mod get_one;
 pub mod home;
 pub mod store;
@@ -7,6 +8,7 @@ pub mod update;
 pub mod update_page;
 
 pub use delete::delete_slang_word;
+pub use get_all::get_slang_words;
 pub use get_one::get_slang_word;
 pub use home::home;
 pub use store::create_slang_word;
