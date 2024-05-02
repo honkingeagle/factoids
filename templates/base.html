@@ -46,7 +46,30 @@
         </span>
       </nav>
     </header>
-    <main class="mt-[15%] md:mt-[10%]">{% block content %}{% endblock %}</main>
+    <main class="mt-[15%] md:mt-[10%]" id="content">
+      {% block content %}
+      <section class="text-center space-y-8 text-neutral-100">
+        <h1 class="text-[2.5rem]">A Slang Word Dictionary for the Cool Kids</h1>
+        <div class="space-y-2 text-sm">
+          <p>ᚲᚱᛖᛏᛖ ᛁᛟᚢᚱ ᛟᚹᚾ ᛞᛖᛊᛏᛁᚾᛁ</p>
+          <p>._.</p>
+          <p>honkingeagle</p>
+        </div>
+      </section>
+      <section class="flex flex-col mt-[5%]">
+        <span
+          hx-get="/slangwords"
+          hx-trigger="revealed"
+          hx-swap="afterend"
+          class="bg-rose-500 mb-[2%] max-w-fit p-2 mx-auto"
+          >Words</span
+        >
+        <section id="slangword_content">
+          {% block slangword_content %}{% endblock %}
+        </section>
+      </section>
+      {% endblock %}
+    </main>
     <script src="/public/htmx.min.js"></script>
   </body>
 </html>
