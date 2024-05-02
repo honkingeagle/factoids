@@ -47,10 +47,6 @@ pub async fn get_slang_word(
                     .into_response(),
             }
         }
-        Err(err) => (
-            StatusCode::NOT_FOUND,
-            format!("{err}"),
-        )
-            .into_response(),
+        Err(err) => (StatusCode::NOT_FOUND, format!("{err}")).into_response(),
     }
 }

@@ -38,10 +38,6 @@ pub async fn create_slang_word(
 
             Redirect::to(&uri).into_response()
         }
-        Err(err) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            format!("{err}"),
-        )
-            .into_response(),
+        Err(err) => (StatusCode::INTERNAL_SERVER_ERROR, format!("{err}")).into_response(),
     }
 }
