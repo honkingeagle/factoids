@@ -2,7 +2,6 @@
 slangword.id == slang_words.last().unwrap().id %}
 <div
   hx-get="/slangwords?page={{ page }}&limit=5"
-  hx-replace-url="true"
   hx-target="#slangword_content"
   hx-trigger="revealed"
   hx-swap="afterend"
