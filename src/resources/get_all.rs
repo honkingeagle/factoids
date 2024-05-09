@@ -38,7 +38,7 @@ pub async fn get_slang_words(
     paginator: Option<Query<Pagination>>,
 ) -> impl IntoResponse {
     let Query(paginator) = paginator.unwrap_or_default();
-        
+
     let offset = (paginator.page - 1) * paginator.limit;
 
     let query = sqlx::query_as::<_, SlangWord>(
@@ -57,19 +57,12 @@ pub async fn get_slang_words(
     match query {
         Ok(slang_words) => {
             let template = IndexTemplate::new(slang_words, paginator.page + 1);
-            
+
             match template.render() {
                 Ok(html) => Html(html).into_response(),
-                Err(err) => (
-                    format!("Failed to render template! {err}"),
-                )
-                    .into_response(),
+                Err(err) => (format!("Failed to render template! {err}"),).into_response(),
             }
         }
-        Err(err) => (
-            StatusCode::NOT_FOUND,
-            format!("{err}"),
-        )
-            .into_response(),
+        Err(err) => (StatusCode::NOT_FOUND, format!("{err}")).into_response(),
     }
 }
