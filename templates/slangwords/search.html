@@ -1,0 +1,17 @@
+{% if searched_word.len() > 0%}
+<section class="text-neutral-100 mx-3 md:mx-14 lg:mx-20 mt-5">
+  <h1 class="mb-2">Search results</h1>
+  {% if words.len() > 0%} {% for slangword in words %}
+  <div
+    hx-replace-url="true"
+    hx-get="/slangword/{{ slangword.id }}"
+    hx-target="#content"
+    class="border-t-2 border-[#FEA86A] py-2 cursor-pointer"
+  >
+    {{ slangword.word }}
+  </div>
+  {% endfor %} {% else %}
+  <div class="border-t-2 border-[#FEA86A] py-2">Word not found</div>
+  {% endif %}
+</section>
+{% endif %}

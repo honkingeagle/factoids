@@ -22,25 +22,34 @@
     <header class="bg-red-400 flex items-center justify-between">
       <section>
         <img
+          hx-replace-url="true"
+          hx-get="/"
+          hx-target="#content"
           src="/public/elpy.png"
           alt="a cartoon robot"
-          class="w-[50%] h-[50%]"
+          class="w-[50%] h-[50%] cursor-pointer"
         />
-        <span class="p-2 bg-[#FEA86A] text-lg">factoids</span>
-      </section>
-      <nav class="hidden md:flex items-center space-x-4 mr-6">
         <span
           hx-replace-url="true"
           hx-get="/"
           hx-target="#content"
-          class="cursor-pointer hover:text-rose-600"
+          class="p-2 bg-[#FEA86A] text-lg cursor-pointer"
+          >factoids</span
+        >
+      </section>
+      <nav class="md:flex items-center space-x-4 mr-3 md:mr-6">
+        <span
+          hx-replace-url="true"
+          hx-get="/"
+          hx-target="#content"
+          class="cursor-pointer hover:text-rose-600 hidden md:block"
           >Home</span
         >
         <span
           hx-replace-url="true"
           hx-get="/slangword/store"
           hx-target="#content"
-          class="cursor-pointer p-2 bg-rose-500 text-lg"
+          class="cursor-pointer p-3 md:p-2 bg-rose-500 text-lg"
         >
           Post
         </span>
@@ -56,18 +65,51 @@
           <p>honkingeagle</p>
         </div>
       </section>
-      <section class="flex flex-col mt-[5%]">
+      <div
+        class="flex justify-between items-center mx-3 md:mx-14 lg:mx-20 mt-[10%]"
+        hx-get="/slangwords"
+        hx-trigger="revealed"
+        hx-target="#slangword_content"
+        hx-swap="afterend"
+      >
         <span
-          hx-get="/slangwords"
-          hx-trigger="revealed"
-          hx-swap="afterend"
-          class="bg-rose-500 mb-[2%] max-w-fit p-2 mx-auto"
-          >Words</span
+          class="bg-rose-500 mb-[2%] max-w-fit p-2 flex items-center space-x-2"
         >
-        <section id="slangword_content">
-          {% block slangword_content %}{% endblock %}
-        </section>
-      </section>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-notebook-text"
+          >
+            <path d="M2 6h4" />
+            <path d="M2 10h4" />
+            <path d="M2 14h4" />
+            <path d="M2 18h4" />
+            <rect width="16" height="20" x="4" y="2" rx="2" />
+            <path d="M9.5 8h5" />
+            <path d="M9.5 12H16" />
+            <path d="M9.5 16H14" />
+          </svg>
+          <p>Words</p></span
+        >
+        <input
+          class="form-control w-[40%] md:w-[30%] p-2"
+          type="search"
+          name="word"
+          placeholder="search"
+          hx-post="/search"
+          hx-trigger="input changed delay:500ms, search"
+          hx-target="#slangword_content"
+          hx-swap="innerHTML"
+        />
+      </div>
+      <section id="slangword_content"></section>
       {% endblock %}
     </main>
     <script src="/public/htmx.min.js"></script>
