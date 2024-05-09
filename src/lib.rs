@@ -35,10 +35,10 @@ impl AppStateBuilder {
     }
 }
 
-
 pub fn create_router(state: SharedState) -> Router {
     Router::new()
         .route("/", get(resources::home))
+        .route("/search", post(resources::search_slang_word))
         .route("/slangwords", get(resources::get_slang_words))
         .route("/slangword/create", post(resources::create_slang_word))
         .route("/slangword/store", get(resources::go_to_store_page))
