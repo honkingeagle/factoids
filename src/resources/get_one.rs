@@ -1,7 +1,10 @@
 use super::{ApiError, SlangWord};
 use crate::SharedState;
 use askama::Template;
-use axum::extract::{Path, State};
+use axum::{
+    response::Html,
+    extract::{Path, State}
+};
 
 #[derive(Template)]
 #[template(path = "slangwords/show.html")]
@@ -18,7 +21,7 @@ impl SlangWordTemplate {
 pub async fn get_slang_word(
     State(state): State<SharedState>,
     Path(id): Path<i32>,
-) -> Result<String, ApiError> {
+) -> Result<Html<String>, ApiError> {
     let slang_word = sqlx::query_as::<_, SlangWord>(
         r#"
             select * 
@@ -34,5 +37,5 @@ pub async fn get_slang_word(
 
     let html = template.render()?;
 
-    Ok(html)
+    Ok(Html(html))
 }

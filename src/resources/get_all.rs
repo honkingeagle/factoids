@@ -1,7 +1,10 @@
 use super::{ApiError, SlangWord};
 use crate::SharedState;
 use askama::Template;
-use axum::extract::{Query, State};
+use axum::{
+    response::Html,
+    extract::{Query, State}
+};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -32,7 +35,7 @@ impl IndexTemplate {
 pub async fn get_slang_words(
     State(state): State<SharedState>,
     paginator: Option<Query<Pagination>>,
-) -> Result<String, ApiError> {
+) -> Result<Html<String>, ApiError> {
     let Query(paginator) = paginator.unwrap_or_default();
 
     let offset = (paginator.page - 1) * paginator.limit;
@@ -54,5 +57,5 @@ pub async fn get_slang_words(
 
     let html = template.render()?;
 
-    Ok(html)
+    Ok(Html(html))
 }
