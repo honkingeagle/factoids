@@ -2,10 +2,10 @@ use crate::SharedState;
 use askama::Template;
 use axum::{
     extract::{Form, State},
-    http::StatusCode,
-    response::{Html, IntoResponse},
+    response::Html,
 };
 use serde::Deserialize;
+use super::ApiError;
 
 #[derive(Deserialize)]
 pub struct SlangWord {
@@ -37,8 +37,8 @@ impl SearchTemplate {
 pub async fn search_slang_word(
     State(state): State<SharedState>,
     Form(slangword): Form<SlangWord>,
-) -> impl IntoResponse {
-    let query = sqlx::query_as::<_, SearchedWords>(
+) -> Result<Html<String>, ApiError> {
+    let slangwords = sqlx::query_as::<_, SearchedWords>(
         r#"
         select id, word
         from slangwords
@@ -47,21 +47,11 @@ pub async fn search_slang_word(
     )
     .bind(&slangword.word)
     .fetch_all(&state.pool)
-    .await;
+    .await?;
 
-    match query {
-        Ok(slangwords) => {
-            let template = SearchTemplate::new(slangwords, slangword.word);
+    let template = SearchTemplate::new(slangwords, slangword.word);
 
-            match template.render() {
-                Ok(html) => Html(html).into_response(),
-                Err(err) => (
-                    StatusCode::NOT_FOUND,
-                    format!("Failed to render template! {err}"),
-                )
-                    .into_response(),
-            }
-        }
-        Err(err) => (StatusCode::INTERNAL_SERVER_ERROR, format!("{err}")).into_response(),
-    }
+    let html = template.render()?;
+
+    Ok(Html(html))
 }
