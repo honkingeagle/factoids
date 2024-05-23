@@ -1,9 +1,10 @@
 use crate::SharedState;
 use axum::{
-    extract::{Form, Path, State},
-    http::StatusCode,
-    response::{IntoResponse, Redirect},
+    extract::{Form, State, Path},
+    response::Redirect,
 };
+use super::ApiError;
+
 
 #[derive(sqlx::FromRow, serde::Deserialize)]
 pub struct SlangWord {
@@ -16,8 +17,8 @@ pub async fn update_slang_word(
     State(state): State<SharedState>,
     Path(id): Path<i32>,
     Form(slangword): Form<SlangWord>,
-) -> impl IntoResponse {
-    let query = sqlx::query(
+) -> Result<Redirect, ApiError> {
+    sqlx::query(
         r#"
             update slangwords 
             set word = $1, synonym = $2, description = $3
@@ -29,14 +30,9 @@ pub async fn update_slang_word(
     .bind(slangword.description)
     .bind(id)
     .execute(&state.pool)
-    .await;
+    .await?;
 
-    match query {
-        Ok(_) => {
-            let uri = format!("/slangword/{}", id);
+    let uri = format!("/slangword/{}", id);
 
-            Redirect::to(&uri).into_response()
-        }
-        Err(err) => (StatusCode::INTERNAL_SERVER_ERROR, format!("Err {err}")).into_response(),
-    }
+    Ok(Redirect::to(&uri))
 }

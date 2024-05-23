@@ -1,11 +1,7 @@
-use super::SlangWord;
+use super::{ApiError, SlangWord};
 use crate::SharedState;
 use askama::Template;
-use axum::{
-    extract::{Query, State},
-    http::StatusCode,
-    response::{Html, IntoResponse},
-};
+use axum::extract::{Query, State};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -36,12 +32,12 @@ impl IndexTemplate {
 pub async fn get_slang_words(
     State(state): State<SharedState>,
     paginator: Option<Query<Pagination>>,
-) -> impl IntoResponse {
+) -> Result<String, ApiError> {
     let Query(paginator) = paginator.unwrap_or_default();
 
     let offset = (paginator.page - 1) * paginator.limit;
 
-    let query = sqlx::query_as::<_, SlangWord>(
+    let slang_words = sqlx::query_as::<_, SlangWord>(
         r#"
         select * 
         from slangwords
@@ -52,17 +48,11 @@ pub async fn get_slang_words(
     .bind(paginator.limit)
     .bind(offset)
     .fetch_all(&state.pool)
-    .await;
+    .await?;
 
-    match query {
-        Ok(slang_words) => {
-            let template = IndexTemplate::new(slang_words, paginator.page + 1);
+    let template = IndexTemplate::new(slang_words, paginator.page + 1);
 
-            match template.render() {
-                Ok(html) => Html(html).into_response(),
-                Err(err) => (format!("Failed to render template! {err}"),).into_response(),
-            }
-        }
-        Err(err) => (StatusCode::NOT_FOUND, format!("{err}")).into_response(),
-    }
+    let html = template.render()?;
+
+    Ok(html)
 }

@@ -15,21 +15,22 @@ pub struct SlangWord {
 #[derive(sqlx::FromRow)]
 pub struct SearchedWords {
     pub id: i32,
-    pub word: String
+    pub word: String,
 }
 
 #[derive(Template)]
 #[template(path = "slangwords/search.html")]
 pub struct SearchTemplate {
     pub searched_word: String,
-    pub words: Vec<SearchedWords>
+    pub words: Vec<SearchedWords>,
 }
-
-
 
 impl SearchTemplate {
     pub fn new(words: Vec<SearchedWords>, searched_word: String) -> SearchTemplate {
-        SearchTemplate { words, searched_word }
+        SearchTemplate {
+            words,
+            searched_word,
+        }
     }
 }
 
